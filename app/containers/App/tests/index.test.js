@@ -12,7 +12,7 @@ describe('<App />', () => {
     const ReactComponent = () => <Header />;
     it('works', () => {
       const expectedState = 'expectedState';
-      const mapStateToProps = state => ({
+      const mapStateToProps = (state) => ({
         state,
       });
       const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
@@ -28,7 +28,7 @@ describe('<App />', () => {
     const ReactComponent = () => <App />;
     it('works', () => {
       const expectedState = 'expectedState';
-      const mapStateToProps = state => ({
+      const mapStateToProps = (state) => ({
         state,
       });
       const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
@@ -44,7 +44,7 @@ describe('<App />', () => {
     const ReactComponent = () => <Footer />;
     it('works', () => {
       const expectedState = 'expectedState';
-      const mapStateToProps = state => ({
+      const mapStateToProps = (state) => ({
         state,
       });
       const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

@@ -2,7 +2,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const { HashedModuleIdsPlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -21,6 +20,9 @@ module.exports = require('./webpack.base.babel')({
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
 
+  cache: true,
+  devtool: 'source-map',
+
   optimization: {
     minimize: true,
     minimizer: [
@@ -38,11 +40,10 @@ module.exports = require('./webpack.base.babel')({
           },
         },
         parallel: true,
-        cache: true,
-        sourceMap: true,
       }),
     ],
     nodeEnv: 'production',
+    moduleIds: 'deterministic',
     sideEffects: true,
     concatenateModules: true,
     runtimeChunk: 'single',
@@ -114,16 +115,10 @@ module.exports = require('./webpack.base.babel')({
         },
       ],
     }),
-
-    new HashedModuleIdsPlugin({
-      hashFunction: 'sha256',
-      hashDigest: 'hex',
-      hashDigestLength: 20,
-    }),
   ],
 
   performance: {
-    assetFilter: assetFilename =>
+    assetFilter: (assetFilename) =>
       !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });

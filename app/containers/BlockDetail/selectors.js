@@ -4,7 +4,7 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the blockDetail state domain
  */
-const selectBlockDetailDomain = state => state.blockDetail || initialState;
+const selectBlockDetailDomain = (state) => state.blockDetail || initialState;
 
 /**
  * Other specific selectors
@@ -15,7 +15,7 @@ const selectBlockDetailDomain = state => state.blockDetail || initialState;
  */
 
 const makeSelectBlockDetail = () =>
-  createSelector(selectBlockDetailDomain, substate => substate);
+  createSelector(selectBlockDetailDomain, (substate) => substate);
 
 export default makeSelectBlockDetail;
 export { selectBlockDetailDomain };

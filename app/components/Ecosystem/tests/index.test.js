@@ -8,7 +8,7 @@ describe('<Ecosystem />', () => {
   const ReactComponent = () => <Ecosystem />;
   it('should render <Ecosystem />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

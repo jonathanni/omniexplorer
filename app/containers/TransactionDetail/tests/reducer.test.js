@@ -1,5 +1,5 @@
+// import produce from 'immer';
 import transactionDetailReducer from '../reducer';
-import produce from 'immer';
 
 export const initialState = {
   transaction: {

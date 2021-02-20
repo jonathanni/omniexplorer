@@ -8,7 +8,7 @@ describe('<Blocks />', () => {
   const ReactComponent = () => <Blocks />;
   it('should render <Blocks />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

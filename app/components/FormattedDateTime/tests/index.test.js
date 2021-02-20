@@ -8,7 +8,7 @@ describe('<FormattedDateTime />', () => {
   const ReactComponent = () => <FormattedDateTime />;
   it('should render <FormattedDateTime />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

@@ -4,10 +4,10 @@
  *
  */
 
-import React, { memo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const StyledLink = styled(Link).attrs({
   className: 'mr-1 text-truncate',

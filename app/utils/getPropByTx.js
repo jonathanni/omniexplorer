@@ -7,17 +7,27 @@ import find from 'lodash/find';
  * @param getProperty: fn() to get property details
  * @returns {*}
  */
+
+/* eslint-disable prettier/prettier */
 export default (tx, getProperty, activations) => {
-  const invalid = ![0, 3, 4, -22, 25, 26, 28, FEATURE_ACTIVATION_TYPE_INT].includes(tx.type_int);
-  const property =
-    tx.propertyid
-      ? getProperty(tx.propertyid)
-      : {
-        ...tx,
-        flags: {
-          invalid,
-        },
-      };
+  const invalid = ![
+    0,
+    3,
+    4,
+    -22,
+    25,
+    26,
+    28,
+    FEATURE_ACTIVATION_TYPE_INT,
+  ].includes(tx.type_int);
+  const property = tx.propertyid
+    ? getProperty(tx.propertyid)
+    : {
+      ...tx,
+      flags: {
+        invalid,
+      },
+    };
 
   if (tx.type_int === FEATURE_ACTIVATION_TYPE_INT) {
     property.name = find(activations, getProperty).featurename;

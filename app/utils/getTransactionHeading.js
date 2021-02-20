@@ -3,4 +3,4 @@ const headings = {
   54: 'Create Property - Managed',
 };
 
-export default tx => headings[tx.type_int] || tx.type;
+export default (tx) => headings[tx.type_int] || tx.type;

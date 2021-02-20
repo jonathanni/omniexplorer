@@ -8,7 +8,7 @@ describe('<Crowdsales />', () => {
   const ReactComponent = () => <Crowdsales />;
   it('should render <Crowdsales />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

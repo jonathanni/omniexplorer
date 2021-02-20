@@ -19,8 +19,7 @@ const NewCrowdsaleTxDetail = (props) => (
   <WrapperTxLabel>
     <p>
       <span>
-        Crowdsale Purchase
-        &nbsp;
+        Crowdsale Purchase &nbsp;
         <SanitizedFormattedNumber
           value={props.amount}
           forceDecimals={props.divisible}
@@ -40,16 +39,14 @@ const NewCrowdsaleTxDetail = (props) => (
     </div>
     <div style={{ display: 'inline-grid' }}>
       <span className="text-left">
-        Purchaser
-        &nbsp;
+        Purchaser &nbsp;
         <SanitizedFormattedNumber
           value={props.purchasedtokens}
           fractionDigits={8}
         />
       </span>
       <span className="text-left">
-        Issuer
-        &nbsp;
+        Issuer &nbsp;
         <SanitizedFormattedNumber
           value={props.issuertokens}
           fractionDigits={8}
@@ -59,12 +56,23 @@ const NewCrowdsaleTxDetail = (props) => (
   </WrapperTxLabel>
 );
 
-function CrowdsalePurchaseAmounts(props) {
-  return (
-    <NewCrowdsaleTxDetail {...props} />
-  );
-}
+NewCrowdsaleTxDetail.propTypes = {
+  amount: PropTypes.number,
+  divisible: PropTypes.bool,
+  dessiredToken: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    propertyid: PropTypes.number.isRequired,
+  }),
+  crowdsale: PropTypes.shape({
+    propertyname: PropTypes.string.isRequired,
+    propertyid: PropTypes.number.isRequired,
+  }),
+  purchasedtokens: PropTypes.number,
+  issuertokens: PropTypes.number,
+};
 
-CrowdsalePurchaseAmounts.propTypes = {};
+function CrowdsalePurchaseAmounts(props) {
+  return <NewCrowdsaleTxDetail {...props} />;
+}
 
 export default CrowdsalePurchaseAmounts;

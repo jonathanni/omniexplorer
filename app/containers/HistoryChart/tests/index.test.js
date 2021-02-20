@@ -8,7 +8,7 @@ describe('<HistoryChart />', () => {
   const ReactComponent = () => <HistoryChart />;
   it('should render <HistoryChart />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

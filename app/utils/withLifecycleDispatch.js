@@ -2,7 +2,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 
-const withLifeCycle = spec => BaseComponent =>
+const withLifeCycle = (spec) => (BaseComponent) =>
   createReactClass({
     ...spec,
     render() {

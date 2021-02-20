@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shallowWithState } from 'enzyme-redux';
 
-import { NoOmniBlocks } from '../index';
+import NoOmniBlocks from '../index';
 
 describe('<NoOmniBlocks />', () => {
   const ReactComponent = () => <NoOmniBlocks />;
   it('should render <NoOmniBlocks />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

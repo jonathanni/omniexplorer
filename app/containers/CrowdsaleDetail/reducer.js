@@ -17,7 +17,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const crowdsaleTransactionsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case LOAD_CROWDSALE_TRANSACTIONS:
         draft.loading = true;
@@ -26,7 +26,11 @@ const crowdsaleTransactionsReducer = (state = initialState, action) =>
         draft.total = 0;
         break;
       case LOAD_CROWDSALE_TRANSACTIONS_SUCCESS:
-        draft.transactions = orderBy(action.transactions, ['blocktime'], ['desc']);
+        draft.transactions = orderBy(
+          action.transactions,
+          ['blocktime'],
+          ['desc'],
+        );
         draft.pageCount = action.pages;
         draft.total = action.total;
         draft.loading = false;

@@ -20,7 +20,7 @@ const babel = require('../../babel.config.js');
 const { presets } = babel;
 let plugins = babel.plugins || [];
 
-plugins.push('react-intl');
+plugins.push('formatjs');
 
 // NOTE: styled-components plugin is filtered out as it creates errors when used with transform
 plugins = plugins.filter(p => p !== 'styled-components');

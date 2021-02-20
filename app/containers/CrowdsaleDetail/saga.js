@@ -12,10 +12,13 @@ export function* getCrowdsaleTransactions({ start = 0, count = 10, id }) {
   const state = yield select(makeSelectCrowdsaleDetail());
   const startPage = state.currentPage || start;
 
-  const body = encoderURIParams({
-    start: startPage,
-    count,
-  }, true);
+  const body = encoderURIParams(
+    {
+      start: startPage,
+      count,
+    },
+    true,
+  );
 
   const getTransactionsOptions = {
     method: 'POST',
@@ -26,11 +29,7 @@ export function* getCrowdsaleTransactions({ start = 0, count = 10, id }) {
     body,
   };
 
-  const transactions = yield call(
-    request,
-    requestURL,
-    getTransactionsOptions,
-  );
+  const transactions = yield call(request, requestURL, getTransactionsOptions);
 
   yield put(
     updateCrowdsaleTransactionsFetch(

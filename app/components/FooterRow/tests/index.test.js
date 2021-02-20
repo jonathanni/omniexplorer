@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shallowWithState } from 'enzyme-redux';
 
-import { FooterRow } from '../index';
+import FooterRow from '../index';
 
 describe('<FooterRow />', () => {
   const ReactComponent = () => <FooterRow />;
   it('should render <FooterRow />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

@@ -8,7 +8,7 @@ import { crowdsalesLoaded } from './actions';
 
 export function* getCrowdsales({ ecosystem }) {
   const requestURL = `${API_URL_BASE}/properties/listactivecrowdsales`;
-  
+
   const body = encoderURIParams({ ecosystem });
   const options = {
     method: 'POST',
@@ -17,7 +17,7 @@ export function* getCrowdsales({ ecosystem }) {
     },
     body,
   };
-  
+
   const crowdsales = yield call(request, requestURL, options);
   yield put(crowdsalesLoaded(crowdsales));
 }

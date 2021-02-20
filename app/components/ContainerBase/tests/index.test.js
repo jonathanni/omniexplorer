@@ -8,7 +8,7 @@ describe('<ContainerBase />', () => {
   const ReactComponent = () => <ContainerBase />;
   it('should render <ContainerBase />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

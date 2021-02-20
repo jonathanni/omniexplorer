@@ -8,7 +8,7 @@ describe('<Transaction />', () => {
   const ReactComponent = () => <Transaction />;
   it('should render <Transaction />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

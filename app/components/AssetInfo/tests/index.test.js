@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shallowWithState } from 'enzyme-redux';
 
-import { AssetInfo } from '../index';
+import AssetInfo from '../index';
 
 describe('<AssetInfo />', () => {
   const ReactComponent = () => <AssetInfo />;
   it('should render <AssetInfo />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

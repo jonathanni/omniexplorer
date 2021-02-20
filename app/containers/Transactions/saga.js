@@ -1,5 +1,9 @@
 import { all, call, put, select, take } from 'redux-saga/effects';
-import { LOAD_TRANSACTIONS, LOAD_UNCONFIRMED, SET_TRANSACTION_TYPE } from 'containers/Transactions/constants';
+import {
+  LOAD_TRANSACTIONS,
+  LOAD_UNCONFIRMED,
+  SET_TRANSACTION_TYPE,
+} from 'containers/Transactions/constants';
 import { API_URL_BASE } from 'containers/App/constants';
 import request from 'utils/request';
 import encoderURIParams from 'utils/encoderURIParams';
@@ -48,7 +52,12 @@ export function* getTransactions({ addr }) {
 
   const transactions = yield call(request, requestURL, getTransactionsOptions);
   yield put(
-    transactionsLoaded(transactions.transactions, transactions.pages, addr, transactions.txcount),
+    transactionsLoaded(
+      transactions.transactions,
+      transactions.pages,
+      addr,
+      transactions.txcount,
+    ),
   );
 }
 

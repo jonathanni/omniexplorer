@@ -5,7 +5,7 @@ import {
 } from './constants';
 
 // Start the fetch, toggle is `isFetching` value
-export const startCrowdsaleTransactionsFetch = crowdsaleId => ({
+export const startCrowdsaleTransactionsFetch = (crowdsaleId) => ({
   type: LOAD_CROWDSALE_TRANSACTIONS,
   id: crowdsaleId,
 });

@@ -4,7 +4,7 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the Activations state domain
  */
-const selectActivationsDomain = state => state.activations || initialState;
+const selectActivationsDomain = (state) => state.activations || initialState;
 
 /**
  * Other specific selectors
@@ -15,12 +15,6 @@ const selectActivationsDomain = state => state.activations || initialState;
  */
 
 const makeSelectActivations = () =>
-  createSelector(
-    selectActivationsDomain,
-    substate => substate,
-  );
+  createSelector(selectActivationsDomain, (substate) => substate);
 
-export {
-  selectActivationsDomain,
-  makeSelectActivations,
-};
+export { selectActivationsDomain, makeSelectActivations };

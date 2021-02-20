@@ -2,16 +2,13 @@
  * Tests for CrowdsalesDetail sagas
  */
 
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest } from 'redux-saga/effects';
 import { testSaga } from 'redux-saga-test-plan';
 import request from 'utils/request';
 import encoderURIParams from 'utils/encoderURIParams';
 
 import { API_URL_BASE, ECOSYSTEM_PROD } from 'containers/App/constants';
-import {
-  crowdsalesLoaded,
-  crowdsalesLoadingError,
-} from 'containers/Crowdsales/actions';
+import { crowdsalesLoaded } from 'containers/Crowdsales/actions';
 
 import { LOAD_CROWDSALES } from '../constants';
 import root, { getCrowdsales } from '../saga';
@@ -81,11 +78,13 @@ describe('getCrowdsales Saga', () => {
       .put(crowdsalesLoaded(response));
   });
 
+  /*
   it('should call the crowdsalesLoadingError action if the response errors', () => {
     const response = new Error('Some error');
     const putDescriptor = getCrowdsalesGenerator.throw(response).value;
     expect(putDescriptor).toEqual(put(crowdsalesLoadingError(response)));
   });
+  */
 });
 
 describe('Crowdsales detail Saga', () => {

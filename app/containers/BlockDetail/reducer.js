@@ -17,7 +17,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const blockDetailReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case LOAD_BLOCK:
         draft.loading = true;

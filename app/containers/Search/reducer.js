@@ -17,8 +17,8 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const searchReducer = (state = initialState, { payload, type } = action) =>
-  produce(state, draft => {
+const searchReducer = (state = initialState, { payload, type }) =>
+  produce(state, (draft) => {
     switch (type) {
       case LOAD_SEARCH:
         draft.loading = true;

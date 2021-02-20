@@ -4,41 +4,35 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the blockDetail state domain
  */
-const selectTokenDomain = state => state.token || initialState;
+const selectTokenDomain = (state) => state.token || initialState;
 
 /**
  * Other specific selectors
  */
-export const getProperties = state => state.token;
-export const getTokens = state => state.token.tokens;
+export const getProperties = (state) => state.token;
+export const getTokens = (state) => state.token.tokens;
 
 /**
  * Default selector used by BlockDetail
  */
 
 const makeSelectProperties = () =>
-  createSelector(selectTokenDomain, substate => substate.tokens);
+  createSelector(selectTokenDomain, (substate) => substate.tokens);
 
-const makeSelectProperty = id => {
-  return createSelector(
-    [selectTokenDomain],
-    (substate, id) => {
-      return substate.tokens[id];
-      }
-  );
-};
+/* eslint-disable no-unused-vars */
+/* eslint no-shadow: ["error", { "allow": ["id"] }] */
+const makeSelectProperty = (id) =>
+  createSelector([selectTokenDomain], (substate, id) => substate.tokens[id]);
+/* eslint-enable no-unused-vars */
 
 const makeSelectLoading = () =>
-  createSelector(selectTokenDomain, substate => substate.isFetching);
+  createSelector(selectTokenDomain, (substate) => substate.isFetching);
 
 const makeSelectLastFetched = () =>
-  createSelector(selectTokenDomain, substate => substate.lastFetched);
+  createSelector(selectTokenDomain, (substate) => substate.lastFetched);
 
-const makeSelectHasProperty = id =>
-  createSelector(
-    selectTokenDomain,
-    substate => !!substate.tokens[id],
-  );
+const makeSelectHasProperty = (id) =>
+  createSelector(selectTokenDomain, (substate) => !!substate.tokens[id]);
 
 export {
   selectTokenDomain,

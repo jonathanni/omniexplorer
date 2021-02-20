@@ -7,9 +7,9 @@ import request from 'utils/request';
 
 export function* getBlock({ block }) {
   const requestURL = `${API_URL_BASE}/transaction/block/${block}`;
-  
+
   const result = yield call(request, requestURL);
-  
+
   yield put(blockLoaded(result));
 }
 

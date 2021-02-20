@@ -10,6 +10,7 @@
  *   return state.set('yourStateVariable', true);
  */
 import produce from 'immer';
+import getMaxPagesByMedia from 'utils/getMaxPagesByMedia';
 import {
   LOAD_TRANSACTIONS,
   LOAD_TRANSACTIONS_SUCCESS,
@@ -28,11 +29,13 @@ export const initialState = {
   unconfirmed: false,
   stamp: null,
 };
-import getMaxPagesByMedia from 'utils/getMaxPagesByMedia';
 
 /* eslint-disable default-case, no-param-reassign */
-const transactionsReducer = (state = initialState, { type, addr, transactions, pages, page, txType, txcount } = action) =>
-  produce(state, draft => {
+const transactionsReducer = (
+  state = initialState,
+  { type, addr, transactions, pages, page, txType, txcount },
+) =>
+  produce(state, (draft) => {
     switch (type) {
       case LOAD_TRANSACTIONS:
         draft.loading = true;
@@ -52,8 +55,12 @@ const transactionsReducer = (state = initialState, { type, addr, transactions, p
       case LOAD_TRANSACTIONS_SUCCESS: {
         const maxPagesByMedia = getMaxPagesByMedia();
 
-        draft.transactions = addr ? transactions.filter(tx => !!tx.confirmations) : transactions;
-        draft.pageCount = state.unconfirmed ? Math.ceil(transactions.length / maxPagesByMedia) : pages;
+        draft.transactions = addr
+          ? transactions.filter((tx) => !!tx.confirmations)
+          : transactions;
+        draft.pageCount = state.unconfirmed
+          ? Math.ceil(transactions.length / maxPagesByMedia)
+          : pages;
         draft.txCount = txcount;
         draft.loading = false;
         draft.stamp = Date.now();

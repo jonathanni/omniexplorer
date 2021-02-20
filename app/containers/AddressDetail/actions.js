@@ -15,10 +15,7 @@
  *    }
  */
 
-import {
-  LOAD_ADDRESS,
-  LOAD_ADDRESS_SUCCESS,
-} from './constants';
+import { LOAD_ADDRESS, LOAD_ADDRESS_SUCCESS } from './constants';
 
 /**
  * Load the address, this action starts the request saga

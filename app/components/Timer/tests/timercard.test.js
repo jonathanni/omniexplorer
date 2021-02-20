@@ -8,7 +8,7 @@ describe('<TimerCard />', () => {
   const ReactComponent = () => <TimerCard />;
   it('should render <TimerCard />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

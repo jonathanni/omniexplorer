@@ -33,7 +33,7 @@ const routeInitialState = {
  */
 /* eslint-disable default-case, no-param-reassign */
 const routeReducer = (state = routeInitialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       /* istanbul ignore next */
       case LOCATION_CHANGE:

@@ -8,7 +8,7 @@ describe('<Search />', () => {
   const ReactComponent = () => <Search />;
   it('should render <Search />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

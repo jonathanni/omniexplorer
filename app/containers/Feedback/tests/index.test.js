@@ -8,7 +8,7 @@ describe('<Feedback />', () => {
   const ReactComponent = () => <Feedback />;
   it('should render <Feedback />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

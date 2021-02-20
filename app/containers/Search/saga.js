@@ -50,7 +50,7 @@ export function* getSearch({ query }) {
       btcBalanceValue = btcBalance.data[address].address.balance;
     }
 
-    const walletBTCBalance = wallet.balance.find(x => x.id == 0);
+    const walletBTCBalance = wallet.balance.find((x) => x.id === 0);
     if (walletBTCBalance) walletBTCBalance.value = btcBalanceValue;
   }
 

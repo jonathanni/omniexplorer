@@ -8,8 +8,6 @@ describe('makeSelectLocation', () => {
     const mockedState = {
       route,
     };
-    expect(makeSelectLocation()(mockedState)).toEqual(
-      routelocation,
-    );
+    expect(makeSelectLocation()(mockedState)).toEqual(route.location);
   });
 });

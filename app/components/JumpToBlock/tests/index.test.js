@@ -8,7 +8,7 @@ describe('<JumpToBlock />', () => {
   const ReactComponent = () => <JumpToBlock />;
   it('should render <JumpToBlock />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

@@ -6,11 +6,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import DevTools from 'utils/devTools';
-import { GLOBAL_ON_SAGA_ERROR } from 'constants.js';
+import { GLOBAL_ON_SAGA_ERROR } from './constants';
 import createReducer from './reducers';
 
 let dispatchFn;
 
+/* eslint-disable no-console */
 const sagaMiddleware = createSagaMiddleware({
   // eslint-disable-next-line no-unused-vars
   onError: (e, sagaStack) => {
@@ -19,9 +20,9 @@ const sagaMiddleware = createSagaMiddleware({
     dispatchFn({ type: GLOBAL_ON_SAGA_ERROR, error: e });
   },
 });
+/* eslint-enable no-console */
 
 export default function configureStore(initialState = {}, history) {
-
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
@@ -57,7 +58,7 @@ export default function configureStore(initialState = {}, history) {
   let { dispatch } = store;
   const middlewareAPI = {
     getState: store.getState,
-    dispatch: action => dispatch(action),
+    dispatch: (action) => dispatch(action),
   };
   dispatch = compose(sagaMiddleware(middlewareAPI))(store.dispatch);
   dispatchFn = dispatch;

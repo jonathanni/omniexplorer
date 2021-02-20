@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shallowWithState } from 'enzyme-redux';
 
-import { List } from '../index';
+import List from '../index';
 
 describe('<List />', () => {
   const ReactComponent = () => <List />;
   it('should render <List />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

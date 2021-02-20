@@ -1,9 +1,8 @@
-export default (strings, ...keys) => {
-  return function(data) {
-    let temp = strings.slice();
+export default (strings, ...keys) =>
+  function (data) {
+    const temp = strings.slice();
     keys.forEach((key, i) => {
-      temp[i] = temp[i] + data[key];
+      temp[i] += data[key];
     });
     return temp.join('');
-  }
-}
+  };

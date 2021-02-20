@@ -4,8 +4,8 @@
  *
  */
 
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import { memo } from 'react';
+// import PropTypes from 'prop-types';
 import { InfoCircle } from '@styled-icons/fa-solid/InfoCircle';
 import styled from 'styled-components';
 

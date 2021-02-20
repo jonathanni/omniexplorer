@@ -4,4 +4,4 @@ export default (str) => {
   } catch (e) {
     return false;
   }
-}
+};

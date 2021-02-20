@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default asset => {
+export default (asset) => {
   let tokenName;
   if (![4, -22, 25, 26].includes(asset.id)) {
     tokenName = (

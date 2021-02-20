@@ -15,10 +15,7 @@
  *    }
  */
 
-import {
-  LOAD_SEARCH,
-  LOAD_SEARCH_SUCCESS,
-} from './constants';
+import { LOAD_SEARCH, LOAD_SEARCH_SUCCESS } from './constants';
 
 /**
  * Load the search, this action starts the request saga

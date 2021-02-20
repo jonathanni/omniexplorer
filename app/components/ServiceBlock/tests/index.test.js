@@ -8,7 +8,7 @@ describe('<ServiceBlock />', () => {
   const ReactComponent = () => <ServiceBlock />;
   it('should render <ServiceBlock />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

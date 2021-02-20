@@ -8,7 +8,7 @@ describe('<Header />', () => {
   const ReactComponent = () => <Header />;
   it('should render <Header />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

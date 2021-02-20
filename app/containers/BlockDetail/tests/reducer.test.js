@@ -1,10 +1,9 @@
+// import produce from 'immer';
 import blockDetailReducer from '../reducer';
 
 const initialBlock = {
   transactions: [],
 };
-
-import produce from 'immer';
 
 export const initialState = {
   loading: true,

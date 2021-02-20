@@ -1,3 +1,5 @@
+/* eslint-disable no-fallthrough */
+
 import produce from 'immer';
 import {
   LOAD_MANY_PROPERTIES,
@@ -16,10 +18,10 @@ export const initialState = {
   lastFetched: 0,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable no-unused-vars, default-case, no-param-reassign */
 const propertyReducer = (state = initialState, action = {}) => {
   const { error, payload, type, propertyId } = action;
-  return produce(state, draft => {
+  return produce(state, (draft) => {
     switch (type) {
       case LOAD_PROPERTY_CANCEL:
         draft.isFetching = false;
@@ -48,8 +50,8 @@ const propertyReducer = (state = initialState, action = {}) => {
         draft.error = null;
         break;
       case LOAD_MANY_PROPERTIES_SUCCESS:
-        payload.forEach(p =>
-          Object.values(p).forEach(token => {
+        payload.forEach((p) =>
+          Object.values(p).forEach((token) => {
             draft.tokens[token.propertyid] = token;
           }),
         );

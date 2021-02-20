@@ -1,6 +1,5 @@
+// import produce from 'immer';
 import blocksReducer from '../reducer';
-
-import produce from 'immer';
 
 export const initialState = {
   loading: true,

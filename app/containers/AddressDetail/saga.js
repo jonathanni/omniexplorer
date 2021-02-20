@@ -24,6 +24,7 @@ export function* getAddress({ addr }) {
     body,
   };
 
+  /* eslint-disable prefer-const */
   // get BTC balance from blockchain.info for the given wallet
   const urlBTCBalance = `${API_URL_BLOCKCHAIN_BTC_BALANCE}${addr}`;
   let [wallet, btcBalance] = yield all([
@@ -53,11 +54,13 @@ export function* getAddress({ addr }) {
     btcBalanceValue = btcBalance.data[addr].address.balance;
   }
 
-  const walletBTCBalance = wallet.balance.find(x => x.id == 0);
+  const walletBTCBalance = wallet.balance.find((x) => x.id === 0);
   if (walletBTCBalance) walletBTCBalance.value = btcBalanceValue;
 
   yield put(addressLoaded(wallet));
-  yield wallet.balance.map(property => put(updateFetch(property.propertyinfo)));
+  yield wallet.balance.map((property) =>
+    put(updateFetch(property.propertyinfo)),
+  );
 }
 
 /**

@@ -16,6 +16,6 @@ export default (params, addEmpties = false) => {
   // concat results
   const cleanParams = addEmpties ? params : pickBy(params, identity);
   return Object.keys(cleanParams)
-    .map(key => encodeURIParam(key, cleanParams[key]))
+    .map((key) => encodeURIParam(key, cleanParams[key]))
     .join('&');
 };

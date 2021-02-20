@@ -5,13 +5,12 @@
 import { memoryHistory } from 'react-router-dom';
 import identity from 'lodash/identity';
 
+// import produce from 'immer';
 import configureStore from '../../configureStore';
 
 import getInjectors, { injectReducerFactory } from '../reducerInjectors';
 
 // Fixtures
-
-import produce from 'immer';
 
 export const initialState = { reduced: 'soon' };
 

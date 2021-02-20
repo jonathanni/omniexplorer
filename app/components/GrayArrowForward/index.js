@@ -4,10 +4,10 @@
  *
  */
 
-import React, { memo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import {ArrowRight} from '@styled-icons/fa-solid/ArrowRight';
+// import PropTypes from 'prop-types';
+import { ArrowRight } from '@styled-icons/fa-solid/ArrowRight';
 
 const GrayArrowForward = styled(ArrowRight).attrs({
   size: 20,

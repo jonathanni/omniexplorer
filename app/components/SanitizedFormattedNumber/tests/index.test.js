@@ -11,7 +11,7 @@ describe('<SanitizedFormattedNumber />', () => {
   const ReactComponent = () => <SanitizedFormattedNumber />;
   it('should render <SanitizedFormattedNumber />', () => {
     const expectedState = { mockedStated: true };
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
       state,
     });
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);

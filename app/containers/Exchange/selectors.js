@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the exchange state domain
  */
 
-const selectExchangeDomain = state => state.exchange || initialState;
+const selectExchangeDomain = (state) => state.exchange || initialState;
 
 /**
  * Other specific selectors
@@ -16,10 +16,7 @@ const selectExchangeDomain = state => state.exchange || initialState;
  */
 
 const makeSelectExchange = () =>
-  createSelector(
-    selectExchangeDomain,
-    substate => substate,
-  );
+  createSelector(selectExchangeDomain, (substate) => substate);
 
 export default makeSelectExchange;
 export { selectExchangeDomain };
