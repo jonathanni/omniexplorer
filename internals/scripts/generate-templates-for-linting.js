@@ -381,5 +381,5 @@ async function generateLanguage(language) {
     { kind: 'container', name: 'MemoizedContainer', memo: true },
   ]).catch(reason => reportErrors(reason));
   
-  await generateLanguage('en').catch(reason => reportErrors(reason));
+  await generateLanguage('fr').catch(reason => reportErrors(reason));
 })();
