@@ -47,7 +47,11 @@ module.exports = plop => {
     return folderPath;
   });
   plop.setActionType('backup', (answers, config) => {
-    console.log(config);
+    console.log(path.join(
+      __dirname,
+      config.path,
+      `${config.file}.${BACKUPFILE_EXTENSION}`,
+    ));
     fs.copyFileSync(
       path.join(__dirname, config.path, config.file),
       path.join(
