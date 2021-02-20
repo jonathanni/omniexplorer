@@ -62,6 +62,8 @@
   "dependencies": {
     "@babel/eslint-parser": "^7.12.17",
     "@babel/polyfill": "^7.12.1",
+    "@formatjs/intl-pluralrules": "^4.0.6",
+    "@formatjs/intl-relativetimeformat": "^8.0.4",
     "@styled-icons/fa-solid": "^10.26.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
