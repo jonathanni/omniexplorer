@@ -2,7 +2,7 @@
  * Tests for TransactionDetail sagas
  */
 
-import { all, takeLatest } from 'redux-saga/effects';
+import { take, call } from 'redux-saga/effects';
 import { testSaga } from 'redux-saga-test-plan';
 
 import request from 'utils/request';
@@ -70,12 +70,10 @@ describe('Root Saga', () => {
   it('should start task to watch for LOAD_TRANSACTION action', () => {
     // arrange
     const rootSaga = root();
-    const expectedYield = all([takeLatest(LOAD_TRANSACTION, getTransaction)]);
-
-    // act
-    const actualYield = rootSaga.next().value;
+    const payload = { action: {} };
 
     // assert
-    expect(actualYield).toEqual(expectedYield);
+    expect(rootSaga.next().value).toEqual(take(LOAD_TRANSACTION));
+    expect(rootSaga.next(payload).value).toEqual(call(getTransaction, payload));
   });
 });

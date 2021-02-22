@@ -7,7 +7,9 @@ export const initialState = {
   pageCount: 0,
   currentPage: 1,
   txType: null,
+  txCount: 0,
   unconfirmed: false,
+  stamp: null,
 };
 
 describe('transactionsReducer', () => {

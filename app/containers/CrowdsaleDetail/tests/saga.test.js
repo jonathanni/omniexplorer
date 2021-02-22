@@ -2,7 +2,7 @@
  * Tests for CrowdsalesDetail sagas
  */
 
-import { all, takeEvery } from 'redux-saga/effects';
+import { take, call } from 'redux-saga/effects';
 import { testSaga } from 'redux-saga-test-plan';
 import request from 'utils/request';
 import encoderURIParams from 'utils/encoderURIParams';
@@ -51,7 +51,7 @@ describe('getCrowdsaleTransactions Saga', () => {
     const url = `${API_URL_BASE}/properties/gethistory/${id}`;
     const body = encoderURIParams(
       {
-        startPage,
+        start: startPage,
         count: 1000,
       },
       true,
@@ -98,14 +98,11 @@ describe('Crowdsales detail Saga', () => {
   it('should start task to watch for LOAD_CROWDSALES action', () => {
     // arrange
     const rootSaga = root();
-    const expectedYield = all([
-      takeEvery(LOAD_CROWDSALE_TRANSACTIONS, getCrowdsaleTransactions),
-    ]);
+    const payload = { ECOSYSTEM_PROD };
 
-    // act
-    const actualYield = rootSaga.next().value;
-
-    // assert
-    expect(actualYield).toEqual(expectedYield);
+    expect(rootSaga.next().value).toEqual(take(LOAD_CROWDSALE_TRANSACTIONS));
+    expect(rootSaga.next(payload).value).toEqual(
+      call(getCrowdsaleTransactions, payload),
+    );
   });
 });

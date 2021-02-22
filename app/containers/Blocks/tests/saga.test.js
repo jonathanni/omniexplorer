@@ -2,7 +2,7 @@
  * Tests for BlockDetail sagas
  */
 
-import { all, takeLatest } from 'redux-saga/effects';
+import { take, call } from 'redux-saga/effects';
 import { testSaga } from 'redux-saga-test-plan';
 import request from 'utils/request';
 
@@ -58,12 +58,9 @@ describe('BlockDetail detail Saga', () => {
   it('should start task to watch for LOAD_BLOCKS action', () => {
     // arrange
     const rootSaga = root();
-    const expectedYield = all([takeLatest(LOAD_BLOCKS, getBlocks)]);
+    const payload = { FIRST_BLOCK };
 
-    // act
-    const actualYield = rootSaga.next().value;
-
-    // assert
-    expect(actualYield).toEqual(expectedYield);
+    expect(rootSaga.next().value).toEqual(take(LOAD_BLOCKS));
+    expect(rootSaga.next(payload).value).toEqual(call(getBlocks, payload));
   });
 });

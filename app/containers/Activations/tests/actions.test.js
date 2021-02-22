@@ -1,13 +1,13 @@
-import defaultAction from '../actions';
-import DEFAULT_ACTION from '../constants';
+import { loadActivations } from '../actions';
+import { LOAD_ACTIVATIONS } from '../constants';
 
 describe('Activations actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('Load Activations Action', () => {
+    it('has a type of LOAD_ACTIVATIONS', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: LOAD_ACTIVATIONS,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(loadActivations()).toEqual(expected);
     });
   });
 });

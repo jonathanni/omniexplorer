@@ -27,7 +27,7 @@ export function* getSearch({ query }) {
   const search = yield call(request, requestURL, options);
 
   // if the query is an address get BTC balance from blockchain.info for the given wallet
-  if (!isEmpty(search.data.address)) {
+  if (!isEmpty(search.data) && !isEmpty(search.data.address)) {
     const wallet = search.data.address;
     const address = search.query;
 
