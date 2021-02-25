@@ -2,8 +2,8 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 // import ReactTestUtils from 'react-dom/test-utils';
 import { connect } from 'react-redux';
-import { mount } from 'enzyme';
-import { shallowWithState } from 'enzyme-redux';
+import { mount, shallow } from 'enzyme';
+
 import SanitizedFormattedNumber from '../index';
 // import { createMockStore } from 'redux-test-utils';
 
@@ -14,12 +14,17 @@ describe('<SanitizedFormattedNumber />', () => {
     const mapStateToProps = (state) => ({
       state,
     });
+    const stateStore = {
+      getState: () => expectedState,
+      subscribe: () => ({}),
+      dispatch: () => ({}),
+    };
+
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
-    const component = shallowWithState(
-      <ConnectedComponent value="1.001" />,
-      expectedState,
+    const component = shallow(
+      <ConnectedComponent value="1.001" store={stateStore} />,
     );
-    expect(component.props().state).toBe(expectedState);
+    expect(component.dive().props().state).toBe(expectedState);
   });
 
   it('should format number', () => {
@@ -28,9 +33,9 @@ describe('<SanitizedFormattedNumber />', () => {
         <SanitizedFormattedNumber value="1001.001000" />
       </IntlProvider>
     );
-    const monted = mount(component);
-    expect(monted.children().length).toBe(1);
-    expect(monted.text()).toBe('1,001.001');
+    const mounted = mount(component);
+    expect(mounted.children().length).toBe(1);
+    expect(mounted.text()).toBe('1,001.001');
   });
 
   it('should format number with maximum decimal places', () => {
@@ -39,8 +44,8 @@ describe('<SanitizedFormattedNumber />', () => {
         <SanitizedFormattedNumber value="364.98653211" />
       </IntlProvider>
     );
-    const monted = mount(component);
-    expect(monted.children().length).toBe(1);
-    expect(monted.text()).toBe('364.98653211');
+    const mounted = mount(component);
+    expect(mounted.children().length).toBe(1);
+    expect(mounted.text()).toBe('364.98653211');
   });
 });

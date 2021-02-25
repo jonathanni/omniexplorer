@@ -1,18 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { shallowWithState } from 'enzyme-redux';
+import { shallow } from 'enzyme';
 
-import Transaction from '../index';
+import CrowdsaleTransaction from '../index';
 
-describe('<Transaction />', () => {
-  const ReactComponent = () => <Transaction />;
-  it('should render <Transaction />', () => {
+describe('<CrowdsaleTransaction />', () => {
+  const ReactComponent = () => <CrowdsaleTransaction />;
+  it('should render <CrowdsaleTransaction />', () => {
     const expectedState = { mockedStated: true };
     const mapStateToProps = (state) => ({
       state,
     });
+    const stateStore = {
+      getState: () => expectedState,
+      subscribe: () => ({}),
+      dispatch: () => ({}),
+    };
+
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
-    const component = shallowWithState(<ConnectedComponent />, expectedState);
-    expect(component.props().state).toBe(expectedState);
+    const component = shallow(<ConnectedComponent store={stateStore} />);
+    expect(component.dive().props().state).toBe(expectedState);
   });
 });

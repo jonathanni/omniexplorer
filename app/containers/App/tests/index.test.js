@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { shallowWithStore } from 'enzyme-redux';
+import { shallow } from 'enzyme';
 import { createMockStore } from 'redux-test-utils';
 
 import Header from 'components/Header';
@@ -16,11 +16,10 @@ describe('<App />', () => {
         state,
       });
       const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
-      const component = shallowWithStore(
-        <ConnectedComponent />,
-        createMockStore(expectedState),
+      const component = shallow(
+        <ConnectedComponent store={createMockStore(expectedState)} />,
       );
-      expect(component.props().state).toBe(expectedState);
+      expect(component.dive().props().state).toBe(expectedState);
     });
   });
 
@@ -32,11 +31,10 @@ describe('<App />', () => {
         state,
       });
       const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
-      const component = shallowWithStore(
-        <ConnectedComponent />,
-        createMockStore(expectedState),
+      const component = shallow(
+        <ConnectedComponent store={createMockStore(expectedState)} />,
       );
-      expect(component.props().state).toBe(expectedState);
+      expect(component.dive().props().state).toBe(expectedState);
     });
   });
 
@@ -48,11 +46,10 @@ describe('<App />', () => {
         state,
       });
       const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
-      const component = shallowWithStore(
-        <ConnectedComponent />,
-        createMockStore(expectedState),
+      const component = shallow(
+        <ConnectedComponent store={createMockStore(expectedState)} />,
       );
-      expect(component.props().state).toBe(expectedState);
+      expect(component.dive().props().state).toBe(expectedState);
     });
   });
 });

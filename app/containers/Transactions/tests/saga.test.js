@@ -2,7 +2,7 @@
  * Tests for Transactions sagas
  */
 
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, take, call } from 'redux-saga/effects';
 import { testSaga } from 'redux-saga-test-plan';
 import request from 'utils/request';
 
@@ -14,7 +14,13 @@ import {
 } from '../constants';
 import { transactionsLoaded } from '../actions';
 import { initialState } from '../reducer';
-import root, { getTransactions, getUnconfirmed } from '../saga';
+import root, {
+  getTransactions,
+  getUnconfirmed,
+  watchGetTransactions,
+  watchGetUnconfirmed,
+  watchGetTransactionsByType,
+} from '../saga';
 
 const txid = 'dbf8b73aa9149ae3e8a96e85c64c48d8061d65c026b16c899e77bb6a607bd45x';
 
@@ -85,20 +91,54 @@ describe('getTransaction Saga', () => {
   */
 });
 
-describe('Root Saga', () => {
+describe('Watch getTransaction Saga', () => {
   it('should start task to watch for LOAD_TRANSACTIONS action', () => {
+    const watchSaga = watchGetTransactions();
+    const payload = {};
+
+    expect(watchSaga.next().value).toEqual(take(LOAD_TRANSACTIONS));
+    expect(watchSaga.next(payload).value).toEqual(
+      call(getTransactions, payload),
+    );
+  });
+});
+
+describe('Watch getUnconfirmed Saga', () => {
+  it('should start task to watch for LOAD_UNCONFIRMED action', () => {
+    const watchSaga = watchGetUnconfirmed();
+    const payload = {};
+
+    expect(watchSaga.next().value).toEqual(take(LOAD_UNCONFIRMED));
+    expect(watchSaga.next(payload).value).toEqual(
+      call(getUnconfirmed, payload),
+    );
+  });
+});
+
+describe('Watch getTransactionsByType Saga', () => {
+  it('should start task to watch for SET_TRANSACTION_TYPE action', () => {
+    const watchSaga = watchGetTransactionsByType();
+    const payload = {};
+
+    expect(watchSaga.next().value).toEqual(take(SET_TRANSACTION_TYPE));
+    expect(watchSaga.next(payload).value).toEqual(
+      call(getUnconfirmed, payload),
+    );
+  });
+});
+
+describe('Root Saga', () => {
+  it('should start task to watch for all actions', () => {
     // arrange
     const rootSaga = root();
-    const expectedYield = all([
-      takeLatest(LOAD_TRANSACTIONS, getTransactions),
-      takeLatest(SET_TRANSACTION_TYPE, getTransactions),
-      takeLatest(LOAD_UNCONFIRMED, getUnconfirmed),
-    ]);
-
-    // act
-    const actualYield = rootSaga.next().value;
 
     // assert
-    expect(actualYield).toEqual(expectedYield);
+    expect(rootSaga.next().value).toEqual(
+      all([
+        call(watchGetTransactions),
+        call(watchGetTransactionsByType),
+        call(watchGetUnconfirmed),
+      ]),
+    );
   });
 });

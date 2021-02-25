@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getAddress Saga should dispatch the addressLoaded action if it requests the data successfully 1`] = `
+exports[`getAddress Saga and blockchain.info did not provide a valid response requests from blockchair and provides a valid response 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": true,
@@ -12,7 +12,7 @@ Object {
         "args": Array [
           "https://api.omniexplorer.info/v1/address/addr",
           Object {
-            "body": "addr=17ScKNXo4cL8DyfWfcCWu1uJySQuJm7iKx",
+            "body": "addr=1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF",
             "headers": Object {
               "Content-Type": "application/x-www-form-urlencoded",
             },
@@ -29,7 +29,119 @@ Object {
       "combinator": false,
       "payload": Object {
         "args": Array [
-          "https://blockchain.info/balance?cors=true&active=17ScKNXo4cL8DyfWfcCWu1uJySQuJm7iKx",
+          "https://blockchain.info/balance?cors=true&active=1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF",
+        ],
+        "context": null,
+        "fn": [Function],
+      },
+      "type": "CALL",
+    },
+  ],
+  "type": "ALL",
+}
+`;
+
+exports[`getAddress Saga and blockchain.info did not provide a valid response requests from blockchair and provides a valid response 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "https://api.blockchair.com/bitcoin/dashboards/address/1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF?state=latest&limit=0,0",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`getAddress Saga and blockchain.info provides a valid response does provide a valid response 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": true,
+  "payload": Array [
+    Object {
+      "@@redux-saga/IO": true,
+      "combinator": false,
+      "payload": Object {
+        "args": Array [
+          "https://api.omniexplorer.info/v1/address/addr",
+          Object {
+            "body": "addr=1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF",
+            "headers": Object {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            "method": "POST",
+          },
+        ],
+        "context": null,
+        "fn": [Function],
+      },
+      "type": "CALL",
+    },
+    Object {
+      "@@redux-saga/IO": true,
+      "combinator": false,
+      "payload": Object {
+        "args": Array [
+          "https://blockchain.info/balance?cors=true&active=1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF",
+        ],
+        "context": null,
+        "fn": [Function],
+      },
+      "type": "CALL",
+    },
+  ],
+  "type": "ALL",
+}
+`;
+
+exports[`getAddress Saga and blockchain.info provides a valid response does provide a valid response 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "https://api.blockchair.com/bitcoin/dashboards/address/1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF?state=latest&limit=0,0",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`getAddress Saga should dispatch the addressLoaded action if it requests the data successfully 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": true,
+  "payload": Array [
+    Object {
+      "@@redux-saga/IO": true,
+      "combinator": false,
+      "payload": Object {
+        "args": Array [
+          "https://api.omniexplorer.info/v1/address/addr",
+          Object {
+            "body": "addr=1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF",
+            "headers": Object {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            "method": "POST",
+          },
+        ],
+        "context": null,
+        "fn": [Function],
+      },
+      "type": "CALL",
+    },
+    Object {
+      "@@redux-saga/IO": true,
+      "combinator": false,
+      "payload": Object {
+        "args": Array [
+          "https://blockchain.info/balance?cors=true&active=1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF",
         ],
         "context": null,
         "fn": [Function],
@@ -47,7 +159,7 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "https://api.blockchair.com/bitcoin/dashboards/address/17ScKNXo4cL8DyfWfcCWu1uJySQuJm7iKx?state=latest&limit=0,0",
+      "https://api.blockchair.com/bitcoin/dashboards/address/1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF?state=latest&limit=0,0",
     ],
     "context": null,
     "fn": [Function],

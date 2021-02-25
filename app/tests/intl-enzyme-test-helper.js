@@ -6,9 +6,10 @@
  */
 
 import React from 'react';
-import { IntlProvider, intlShape } from 'react-intl';
+import { createIntl, IntlProvider } from 'react-intl';
 import { mount, shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
+import PropTypes from 'prop-types';
 
 /**
  * mock store
@@ -34,14 +35,9 @@ function nodeWithIntlProp(node, intl, store) {
 
 function getIntlShape(messages = defaultMessages) {
   // Create the IntlProvider to retrieve context for wrapping around.
-  const intlProvider = new IntlProvider(
-    {
-      locale: 'en',
-      messages,
-    },
-    {},
-  );
-  const { intl } = intlProvider.getChildContext();
+  const locale = 'en';
+  const intl = createIntl({ locale, messages });
+
   return intl;
 }
 
@@ -58,8 +54,33 @@ export function mountWithIntl(node, msgs = defaultMessages) {
       store,
     },
     childContextTypes: {
-      intl: intlShape,
+      intl: PropTypes.object,
+      store: PropTypes.object,
     },
+  });
+}
+
+export function mountWithIntlStore(node, msgs = defaultMessages) {
+  const intl = getIntlShape(msgs);
+  const store = mockStore();
+
+  const options = {
+    wrappingComponent: IntlProvider,
+    wrappingComponentProps: {
+      locale: 'en',
+    },
+  };
+
+  return mount(nodeWithIntlProp(node, intl, store), {
+    context: {
+      intl,
+      store,
+    },
+    childContextTypes: {
+      intl: PropTypes.object,
+      store: PropTypes.object,
+    },
+    ...options,
   });
 }
 

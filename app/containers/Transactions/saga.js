@@ -61,21 +61,21 @@ export function* getTransactions({ addr }) {
   );
 }
 
-function* watchGetTransactions() {
+export function* watchGetTransactions() {
   while (true) {
     const payload = yield take(LOAD_TRANSACTIONS);
     yield call(getTransactions, payload);
   }
 }
 
-function* watchGetUnconfirmed() {
+export function* watchGetUnconfirmed() {
   while (true) {
     const payload = yield take(LOAD_UNCONFIRMED);
     yield call(getUnconfirmed, payload);
   }
 }
 
-function* watchGetTransactionsByType() {
+export function* watchGetTransactionsByType() {
   while (true) {
     const payload = yield take(SET_TRANSACTION_TYPE);
     yield call(getUnconfirmed, payload);

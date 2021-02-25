@@ -27,6 +27,6 @@ const WarningTooltip = styled(UncontrolledTooltip).attrs({
   }
 `;
 
-WarningTooltip.propTypes = {};
+WarningTooltip.propTypes = UncontrolledTooltip.propTypes;
 
 export default memo(WarningTooltip);

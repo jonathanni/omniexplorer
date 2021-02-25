@@ -2,10 +2,10 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducers';
 
 const selectGlobal = (state) => state.global || initialState;
-const selectRouter = (state) => state.router;
+const selectRoute = (state) => state.route;
 
 const makeSelectLocation = () =>
-  createSelector(selectRouter, (routerState) => routerState.location);
+  createSelector(selectRoute, (routeState) => routeState.location);
 const makeSelectLoading = () =>
   createSelector(selectGlobal, (globalState) => globalState.loading);
 

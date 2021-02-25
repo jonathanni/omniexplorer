@@ -1,19 +1,24 @@
 /**
  * Tests for AddressDetail sagas
  */
+import {
+  API_URL_BASE,
+  API_URL_BLOCKCHAIN_BTC_BALANCE,
+  FN_API_URL_BLOCKCHAIR_BTC_BALANCE,
+} from 'containers/App/constants';
 
-import { all, takeLatest } from 'redux-saga/effects';
-import { testSaga } from 'redux-saga-test-plan';
+import { all, put, take, call } from 'redux-saga/effects';
+import { cloneableGenerator } from '@redux-saga/testing-utils';
 import request from 'utils/request';
 import encoderURIParams from 'utils/encoderURIParams';
 
-import { API_URL_BASE } from 'containers/App/constants';
+import { updateFetch } from 'components/Token/actions';
 import { addressLoaded } from 'containers/AddressDetail/actions';
 
 import { LOAD_ADDRESS } from 'containers/AddressDetail/constants';
 import root, { getAddress } from '../saga';
 
-const addr = '17ScKNXo4cL8DyfWfcCWu1uJySQuJm7iKx';
+const addr = '1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF';
 
 /* eslint-disable redux-saga/yield-effects */
 describe('getAddress Saga', () => {
@@ -31,46 +36,112 @@ describe('getAddress Saga', () => {
     expect(callDescriptor).toMatchSnapshot();
   });
 
-  it('should dispatch the addressLoaded action if it requests the data successfully', () => {
-    const response = {
-      balance: [
-        {
+  const saga = cloneableGenerator(getAddress)({ addr });
+  const response = {
+    balance: [
+      {
+        divisible: true,
+        frozen: '0',
+        id: '0',
+        pendingneg: '0',
+        pendingpos: '0',
+        propertyinfo: {
+          blocktime: 1231006505,
+          data:
+            'The Times 03/Jan/2009 Chancellor on brink of second bailout for banks',
           divisible: true,
-          frozen: '0',
-          id: '31',
-          pendingneg: '-6586595182600',
-          pendingpos: '0',
-          reserved: '0',
-          symbol: 'SP31',
-          value: '321623187160442',
+          flags: {},
+          issuer: 'Satoshi Nakamoto',
+          name: 'BTC',
+          propertyid: 0,
+          rdata: null,
+          registered: false,
+          totaltokens: '18637850.00000000',
+          url: 'http://www.bitcoin.org',
         },
-        {
-          divisible: true,
-          id: 0,
-          pendingneg: '0',
-          pendingpos: '0',
-          symbol: 'BTC',
-          value: '251440000',
-        },
-      ],
-    };
-
-    const saga = testSaga(getAddress, { addr });
-    const url = `${API_URL_BASE}/address/addr`;
-    const body = encoderURIParams({ addr });
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        symbol: 'BTC',
+        value: '0',
       },
-      body,
-    };
+    ],
+  };
 
-    saga
-      .next()
-      .call(request, url, options)
-      .next(response)
-      .put(addressLoaded(response));
+  const responseBalance = {
+    [addr]: {
+      final_balance: 7995720580428,
+      n_tx: 368,
+      total_received: 7995720580428,
+    },
+  };
+
+  const responseBalanceBlockchair = {
+    data: {
+      [addr]: {
+        address: {
+          balance: 7995720579651,
+          received: 7995720579651,
+          spent: 0,
+          output_count: 368,
+        },
+      },
+    },
+  };
+
+  const url = `${API_URL_BASE}/address/addr`;
+  const urlBTCBalance = `${API_URL_BLOCKCHAIN_BTC_BALANCE}${addr}`;
+  const body = encoderURIParams({ addr });
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body,
+  };
+
+  it('should dispatch the addressLoaded action if it requests the data successfully', () => {
+    expect(saga.next().value).toEqual(
+      all([call(request, url, options), call(request, urlBTCBalance)]),
+    );
+  });
+
+  describe('and blockchain.info provides a valid response', () => {
+    let clone;
+
+    beforeAll(() => {
+      clone = saga.clone();
+    });
+
+    it('does provide a valid response', () => {
+      expect(clone.next([response, responseBalance]).value).toEqual(
+        put(addressLoaded(response)),
+      );
+      expect(clone.next().value).toEqual([
+        put(updateFetch(response.balance[0].propertyinfo)),
+      ]);
+    });
+  });
+
+  describe('and blockchain.info did not provide a valid response', () => {
+    let clone;
+
+    beforeAll(() => {
+      clone = saga.clone();
+    });
+
+    it('requests from blockchair and provides a valid response', () => {
+      const urlBTCBalanceAlternative = FN_API_URL_BLOCKCHAIR_BTC_BALANCE({
+        address: addr,
+      });
+
+      expect(clone.next([response, {}]).value).toEqual(
+        call(request, urlBTCBalanceAlternative),
+      );
+      expect(clone.next(responseBalanceBlockchair).value).toEqual(
+        put(addressLoaded(response)),
+      );
+      expect(clone.next().value).toEqual([
+        put(updateFetch(response.balance[0].propertyinfo)),
+      ]);
+    });
   });
 
   /*
@@ -86,12 +157,10 @@ describe('Address detail Saga', () => {
   it('should start task to watch for LOAD_ADDRESS action', () => {
     // arrange
     const rootSaga = root();
-    const expectedYield = all([takeLatest(LOAD_ADDRESS, getAddress)]);
-
-    // act
-    const actualYield = rootSaga.next().value;
+    const payload = { addr };
 
     // assert
-    expect(actualYield).toEqual(expectedYield);
+    expect(rootSaga.next().value).toEqual(take(LOAD_ADDRESS));
+    expect(rootSaga.next(payload).value).toEqual(call(getAddress, payload));
   });
 });

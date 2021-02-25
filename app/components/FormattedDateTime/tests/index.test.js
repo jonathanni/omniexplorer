@@ -11,7 +11,6 @@ describe('<FormattedDateTime />', () => {
     const mapStateToProps = (state) => ({
       state,
     });
-
     const stateStore = {
       getState: () => expectedState,
       subscribe: () => ({}),
@@ -20,7 +19,6 @@ describe('<FormattedDateTime />', () => {
 
     const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
     const component = shallow(<ConnectedComponent store={stateStore} />);
-
     expect(component.dive().props().state).toBe(expectedState);
   });
 });

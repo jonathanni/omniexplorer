@@ -27,7 +27,7 @@ const NewCrowdsaleTxDetail = (props) => (
       </span>
       &nbsp;&nbsp;
       <span className="text-muted">
-        {props.dessiredToken.name} (#{props.dessiredToken.propertyid})
+        {props.desiredToken.name} (#{props.desiredToken.propertyid})
       </span>
     </p>
     <div className="text-muted d-inline-block">
@@ -59,7 +59,7 @@ const NewCrowdsaleTxDetail = (props) => (
 NewCrowdsaleTxDetail.propTypes = {
   amount: PropTypes.number,
   divisible: PropTypes.bool,
-  dessiredToken: PropTypes.shape({
+  desiredToken: PropTypes.shape({
     name: PropTypes.string.isRequired,
     propertyid: PropTypes.number.isRequired,
   }),
