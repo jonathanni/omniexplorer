@@ -7,6 +7,8 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 import { EXTERNAL_EXPLORER_BLOCKCHAIR } from './constants';
 
 const IMG = styled.img.attrs({
@@ -51,6 +53,10 @@ function ExplorerLink({ explorerId, tx, className }) {
   );
 }
 
-ExplorerLink.propTypes = {};
+ExplorerLink.propTypes = {
+  explorerId: PropTypes.string,
+  tx: PropTypes.string,
+  className: PropTypes.string,
+};
 
 export default ExplorerLink;

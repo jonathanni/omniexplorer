@@ -7,28 +7,38 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import GrayArrowDown from '../index';
 
 describe('<GrayArrowDown />', () => {
+  const ReactComponent = () => <GrayArrowDown />;
+  const expectedState = { mockedStated: true };
+  const mapStateToProps = (state) => ({
+    state,
+  });
+  const stateStore = {
+    getState: () => expectedState,
+    subscribe: () => ({}),
+    dispatch: () => ({}),
+  };
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(<GrayArrowDown />);
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should render <GrayArrowDown />', () => {
+    const ConnectedComponent = connect(mapStateToProps)(ReactComponent);
+    const component = shallow(<ConnectedComponent store={stateStore} />);
+    expect(component.dive().props().state).toBe(expectedState);
   });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
+  it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
     } = render(<GrayArrowDown />);

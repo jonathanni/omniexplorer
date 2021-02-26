@@ -15,18 +15,20 @@ const H4 = styled.h4`
   margin-top: 0.5rem;
 `;
 
+const styledStyledA = styled(StyledA)`
+          pointer-events: none;
+          text-decoration: none;
+          opacity: 0.5;
+          cursor: not-allowed;
+        `;
+
 function BlockPagination({ block, latest }) {
   const LinkPrevious = StyledA;
 
   const LinkNext =
     latest > block
       ? StyledA
-      : styled(StyledA)`
-          pointer-events: none;
-          text-decoration: none;
-          opacity: 0.5;
-          cursor: not-allowed;
-        `;
+      : styledStyledA;
 
   const prevBlock = parseInt(block, 10) - 1;
   const nextBlock = parseInt(block, 10) + 1;

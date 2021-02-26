@@ -1,6 +1,8 @@
 import React from 'react';
 import StyledLink from 'components/StyledLink';
 
+import PropTypes from 'prop-types';
+
 /**
  *
  * @param asset
@@ -23,3 +25,9 @@ export default function AssetLink({ asset, children, basepath }) {
   
   return link;
 }
+
+AssetLink.propTypes = {
+  asset: PropTypes.number,
+  children: PropTypes.any,
+  basepath: PropTypes.string,
+};

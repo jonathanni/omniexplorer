@@ -15,18 +15,20 @@ const H3 = styled.h3`
   margin-top: 0.5rem;
 `;
 
+const styledStyledA = styled(StyledA)`
+          pointer-events: none;
+          text-decoration: none;
+          opacity: 0.5;
+          cursor: not-allowed;
+        `;
+
 function ClientSidePagination({ idx, latest, base }) {
   const LinkPrevious = StyledA;
 
   const LinkNext =
     latest > idx
       ? StyledA
-      : styled(StyledA)`
-          pointer-events: none;
-          text-decoration: none;
-          opacity: 0.5;
-          cursor: not-allowed;
-        `;
+      : styledStyledA;
 
   return (
     <Row>
