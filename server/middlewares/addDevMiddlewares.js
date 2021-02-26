@@ -2,13 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 function createWebpackMiddleware(compiler, publicPath) {
   return webpackDevMiddleware(compiler, {
-    noInfo: true,
     publicPath,
-    silent: true,
     stats: 'errors-only',
     headers: { 'Access-Control-Allow-Origin': '*' },
   });
@@ -26,13 +24,13 @@ module.exports = function addDevMiddlewares(app, webpackConfig) {
 
   // Since webpackDevMiddleware uses memory-fs internally to store build
   // artifacts, we use it instead
-  const fs = middleware.fileSystem;
+  const fs = middleware.context.outputFileSystem;
 
   // Setup proxy
   // `/api/lorum/ipsum` -> `http://localhost:3000/lorum/ipsum`
   app.use(
     '/api',
-    proxy({
+    createProxyMiddleware({
       target: 'https://api.omniexplorer.info/',
       changeOrigin: true,
       logLevel: 'debug',
