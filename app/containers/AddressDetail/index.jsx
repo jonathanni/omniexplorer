@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { Col, Container, Row } from 'reactstrap';
@@ -30,7 +31,7 @@ const Layout = styled(Container)`
 `;
 
 export function AddressDetail(props) {
-  const { address } = props.match.params;
+  const { address } = useParams();
 
   useInjectReducer({
     key: 'addressDetail',

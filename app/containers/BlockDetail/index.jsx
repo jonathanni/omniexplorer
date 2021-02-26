@@ -10,6 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { useParams, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 import {
@@ -65,7 +66,8 @@ const StyledContainer = styled(ContainerBase).attrs({
 `;
 
 export function BlockDetail(props) {
-  const { block } = props.match.params;
+  const { block } = useParams();
+  const location = useLocation();
   const [showTxType, setShowTxType] = useState(ALL_BLOCK_TRANSACTIONS);
   const [transactions, setTransactions] = useState({});
   const [currentData, setCurrentData] = useState([]);
@@ -88,7 +90,7 @@ export function BlockDetail(props) {
     const { blockdetail } = props;
 
     if (isEmpty(transactions) && blockdetail.block.block === Number(block)) {
-      setCurrentPage(parseInt(props.location.hash.replace('#', ''), 10) || page);
+      setCurrentPage(parseInt(location.hash.replace('#', ''), 10) || page);
       setCurrentData(blockdetail.block.transactions.slice(0, maxPagesByMedia));
       setPageCount(Math.ceil(blockdetail.block.transactions.length / maxPagesByMedia));
 

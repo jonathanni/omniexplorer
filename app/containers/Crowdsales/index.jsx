@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import { Col, Container, Row, Table, UncontrolledTooltip } from 'reactstrap';
+import { useParams } from 'react-router-dom';
+
 import InfoCircleIcon from 'components/InfoCircleIcon';
 
 import injectSaga from 'utils/injectSaga';
@@ -44,9 +46,11 @@ export class Crowdsales extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
+	
+	const params = useParams();
 
     this.ecosystem =
-      props.match.params.ecosystem.toString() ===
+      params.ecosystem.toString() ===
       ECOSYSTEM_PROD_NAME.toLowerCase()
         ? ECOSYSTEM_PROD
         : ECOSYSTEM_TEST;

@@ -12,6 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import { Col, Container, Jumbotron, Row, Table } from 'reactstrap';
 import isEmpty from 'lodash/isEmpty';
+import { useParams } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -53,7 +54,7 @@ const StyledTR = styled.tr.attrs({
 })``;
 
 export function Search(props) {
-  const { query } = props.match.params;
+  const { query } = useParams();
 
   useInjectReducer({
     key: 'search',

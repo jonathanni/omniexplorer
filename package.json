@@ -79,7 +79,7 @@
     "enzyme-redux": "^0.2.1",
     "express": "4.17.1",
     "fontfaceobserver": "2.1.0",
-    "history": "5.0.0",
+    "history": "^4.10.1",
     "hoist-non-react-statics": "3.3.2",
     "immer": "8.0.1",
     "intl": "1.2.5",

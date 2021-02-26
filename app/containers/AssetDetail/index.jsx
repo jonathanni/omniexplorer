@@ -12,6 +12,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import StyledLink from 'components/StyledLink';
 import { Col, Container, Row, Table } from 'reactstrap';
+import { useParams } from 'react-router-dom';
 
 import { startFetch } from 'components/Token/actions';
 import { makeSelectLoading, makeSelectProperties } from 'components/Token/selectors';
@@ -34,7 +35,7 @@ const SubtitleDetail = styled.small`
 `;
 
 export function AssetDetail(props) {
-  const { propertyid } = props.match.params;
+  const { propertyid } = useParams();
 
   const getProp = propId => props.tokens[propId];
 

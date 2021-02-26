@@ -36,6 +36,14 @@ const StyledContainer = styled(ContainerBase)`
   padding-bottom: 0;
 `;
 
+const emptyStyledA = styled(StyledA)``;
+const styledStyledA = styled(StyledA)`
+            pointer-events: none;
+            text-decoration: none;
+            opacity: 0.5;
+            cursor: not-allowed;
+          `;
+
 export function Blocks(props) {
   const block = props.match.params.block || '';
   
@@ -92,16 +100,11 @@ export function Blocks(props) {
       return result;
     };
     
-    const LinkPrevious = styled(StyledA)``;
+    const LinkPrevious = emptyStyledA;
     const LinkNext =
       isEmpty(blocks) || props.latest > blocks[0].block
         ? StyledA
-        : styled(StyledA)`
-            pointer-events: none;
-            text-decoration: none;
-            opacity: 0.5;
-            cursor: not-allowed;
-          `;
+        : styledStyledA;
     
     pagination = (
       <Row>

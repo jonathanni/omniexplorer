@@ -10,6 +10,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Container } from 'reactstrap';
+import { useParams } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -31,7 +32,7 @@ import { loadTransaction } from './actions';
 import reducer from './reducer';
 
 export function TransactionDetail(props) {
-  const { tx } = props.match.params;
+  const { tx } = useParams();
 
   useInjectSaga({
     key: 'transactionDetail',

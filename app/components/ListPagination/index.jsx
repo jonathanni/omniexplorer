@@ -24,6 +24,9 @@ const StyledPaginationLink = styled(PaginationLink)`
   margin-left: 1px;
 `;
 const StyledPaginationButton = styled(PaginationItem)`
+  :before {
+    content: none;
+  }
   margin: 0 2px;
   background-color: white;
   &.disabled {
@@ -37,7 +40,7 @@ const StyledPaginationItem = styled(StyledPaginationButton)`
   }
   &.active > .page-link {
     background-color: #3498db !important;
-    color: #337ab7;
+    color: #fff;
   }
 `;
 
@@ -90,23 +93,20 @@ const ListPagination = props => {
       <StyledPaginationButton
         onClick={e => setPage(e, 1)}
         disabled={listPagination.count === 1 || listPagination.current === 1}
-        key="first"
-      >
+        key="first">
         <PaginationLink first/>
       </StyledPaginationButton>
       <StyledPaginationButton
         onClick={e => setPage(e, getPrevious())}
         disabled={listPagination.count === 1 || listPagination.current === 1}
-        key="previous"
-      >
+        key="previous">
         <StyledPaginationLink previous/>
       </StyledPaginationButton>
       {listPagination.range.map(v => (
         <StyledPaginationItem
           onClick={e => setPage(e, v.value)}
           className={v.isCurrent ? 'page-item active' : 'page-item'}
-          key={v.value}
-        >
+          key={v.value}>
           <StyledPaginationLink>
             {v.value}
           </StyledPaginationLink>
@@ -118,8 +118,7 @@ const ListPagination = props => {
           listPagination.count === 1 ||
           listPagination.current === listPagination.count
         }
-        key="next"
-      >
+        key="next">
         <StyledPaginationLink next/>
       </StyledPaginationButton>
       <StyledPaginationButton
@@ -128,8 +127,7 @@ const ListPagination = props => {
           listPagination.count === 1 ||
           listPagination.current === listPagination.count
         }
-        key="last"
-      >
+        key="last">
         <PaginationLink last/>
       </StyledPaginationButton>
     </Pagination>

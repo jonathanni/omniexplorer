@@ -43,9 +43,11 @@ export class Properties extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
+	
+	const params = useParams();
 
     this.query =
-      props.match.params.query.toString() === ECOSYSTEM_PROD_NAME.toLowerCase()
+      params.query.toString() === ECOSYSTEM_PROD_NAME.toLowerCase()
         ? ECOSYSTEM_PROD
         : ECOSYSTEM_TEST;
     this.ecosystem =

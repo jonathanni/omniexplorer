@@ -11,6 +11,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import { useParams } from 'react-router-dom';
+
 import InfoCircleIcon from 'components/InfoCircleIcon';
 import {
   Card,
@@ -83,7 +85,7 @@ const HistoryContainer = ContainerBase;
 const StyledRow = styled(Row).attrs({})``;
 
 export function CrowdsaleDetail(props) {
-  const { crowdsaleid } = props.match.params;
+  const { crowdsaleid } = useParams();
 
   useInjectReducer({
     key: 'crowdsaleDetail',

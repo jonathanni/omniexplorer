@@ -34,7 +34,7 @@ function AssetLogo({ asset, prop, className, style}) {
 
   return (
     <span>
-      <IMGLogo src={logo} alt={asset.name} id={id} className={className} style={style}/>
+      <IMGLogo src={logo.default} alt={asset.name} id={id} className={className} style={style}/>
       { CurrentTooltip }
     </span>
   );

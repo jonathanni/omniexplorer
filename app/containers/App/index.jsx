@@ -104,49 +104,69 @@ export function App({
       <Header />
       <ErrorBoundary>
         <Switch>
-          <Route exact path="/:block(\d+)?" component={HomePage} />
-          <Route path="/tx/:tx" component={TransactionDetail} />
-          <Route path="/transactions/unconfirmed" component={Transactions} />
+          <Route exact path="/:block(\d+)?">
+		    <HomePage />
+		  </Route>
+          <Route path="/tx/:tx">
+		    <TransactionDetail />
+		  </Route>
+          <Route path="/transactions/unconfirmed">
+		    <Transactions />
+		  </Route>
           <Route
             path="/address/:address/:page(\d+)?"
-            component={AddressDetail}
-            key={location.pathname}
-          />
+            key={location.pathname}>
+			<AddressDetail />
+		  </Route>
           <Route
             path="/search/:query"
-            component={Search}
-            key={location.pathname}
-          />
+            key={location.pathname}>
+			<Search />
+		  </Route>
           <Route
             path="/properties/:query"
-            component={Properties}
-            key={location.pathname}
-          />
+            key={location.pathname}>
+			<Properties />
+		  </Route>
           <Route
             path="/asset/:propertyid(\d+)"
-            component={AssetDetail}
-            key={location.pathname}
-          />
-          <Route exact path="/crowdsales/:ecosystem" component={Crowdsales} />
+            key={location.pathname}>
+			<AssetDetail />
+		  </Route>
+          <Route exact path="/crowdsales/:ecosystem">
+		    <Crowdsales />
+		  </Route>
           <Route
             path="/crowdsale/:crowdsaleid(\d+)"
-            component={CrowdsaleDetail}
-            key={location.pathname}
-          />
+            key={location.pathname}>
+			<CrowdsaleDetail />
+		  </Route>
           <Route
             exact
             path="/block/:block(\d+)"
-            component={BlockDetail}
-            key={location.pathname}
-          />
-          <Route exact path="/promote" component={Promote} />
-          <Route exact path="/submitfeedback" component={Feedback} />
+            key={location.pathname}>
+			<BlockDetail />
+		  </Route>
+          <Route exact path="/promote">
+		    <Promote />
+		  </Route>
+          <Route exact path="/submitfeedback">
+		    <Feedback />
+		  </Route>
           {/*<Route exact path="/analytics" component={HistoryChart} />*/}
-          <Route exact path="/blocks/:block(\d+)?" component={FullBlockList} />
-          <Route exact path="/activations" component={Activations} />
+          <Route exact path="/blocks/:block(\d+)?">
+		    <FullBlockList />
+		  </Route>
+          <Route exact path="/activations">
+		    <Activations />
+		  </Route>
           {/*<Route exact path="/exchange" component={Exchange} />*/}
-          <Route path="" component={NotFoundPage} />
-          <Route component={NotFoundPage} />
+          <Route path="">
+		    <NotFoundPage />
+		  </Route>
+          <Route>
+		    <NotFoundPage />
+		  </Route>
         </Switch>
       </ErrorBoundary>
       <Footer />

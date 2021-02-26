@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import styled from 'styled-components';
+import { useParams, useLocation } from 'react-router-dom';
+
 import List from 'components/List';
 import TransactionListHeader from 'components/TransactionListHeader';
 import Transaction from 'components/Transaction';
@@ -47,9 +49,12 @@ const StyledContainer = styled(ContainerBase)`
 `;
 
 export function Transactions(props) {
-  const unconfirmedTxs = props.location.pathname.includes('unconfirmed');
+  const params = useParams();
+  const location = useLocation();
+  
+  const unconfirmedTxs = location.pathname.includes('unconfirmed');
   const pageParam =
-    props.match.params.page ||
+    params.page ||
     (unconfirmedTxs && props.transactions.currentPage) ||
     props.currentPage ||
     1;

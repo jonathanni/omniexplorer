@@ -128,7 +128,7 @@ class BlockList extends React.PureComponent {
         const asset = block.value.details[prop];
 
         return (
-          <AssetLink key={key} asset={prop} state={this.props.state}>
+          <AssetLink key={key} asset={parseInt(prop)} state={this.props.state}>
             <AssetLogo
               asset={asset}
               prop={prop}
