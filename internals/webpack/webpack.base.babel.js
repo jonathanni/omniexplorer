@@ -92,7 +92,7 @@ module.exports = (options) => ({
                 optimizationLevel: 7,
               },
               pngquant: {
-                quality: '65-90',
+                quality: [0.65, 0.9],
                 speed: 4,
               },
             },
@@ -115,10 +115,10 @@ module.exports = (options) => ({
     ],
   },
   plugins: options.plugins.concat([
-    new webpack.ProvidePlugin({
+    /* new webpack.ProvidePlugin({
       // make fetch available
-      fetch: 'exports-loader?self.fetch!whatwg-fetch',
-    }),
+      fetch: 'imports-loader?this=>global!exports-loader?exports!global.fetch!whatwg-fetch',
+    }), */
 
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; UglifyJS will automatically
